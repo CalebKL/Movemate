@@ -51,10 +51,10 @@ import com.calebk.shipments.ui.composables.ShipmentHistoryScreen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShipmentScreen(shipmentHistory: List<ShipmentItems>, loading: Boolean, navigateBackHome: () -> Unit) {
-    var shouldAnimate by remember { mutableStateOf(false) }
+    var shouldAnimateOnFirstLaunch by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        shouldAnimate = true
+        shouldAnimateOnFirstLaunch = true
     }
 
     Scaffold(
@@ -71,7 +71,7 @@ fun ShipmentScreen(shipmentHistory: List<ShipmentItems>, loading: Boolean, navig
                 ),
                 title = {
                     AnimatedVisibility(
-                        visible = shouldAnimate,
+                        visible = shouldAnimateOnFirstLaunch,
                         enter = slideInVertically(
                             initialOffsetY = { it },
                             animationSpec = tween(durationMillis = 300, easing = LinearEasing),
@@ -86,7 +86,7 @@ fun ShipmentScreen(shipmentHistory: List<ShipmentItems>, loading: Boolean, navig
                     }
                 },
                 navigationIcon = {
-                    AnimatedVisibility(shouldAnimate) {
+                    AnimatedVisibility(shouldAnimateOnFirstLaunch) {
                         IconButton(
                             modifier = Modifier
                                 .padding(start = 12.dp)
@@ -110,6 +110,7 @@ fun ShipmentScreen(shipmentHistory: List<ShipmentItems>, loading: Boolean, navig
                 modifier = Modifier.padding(it),
                 historyItems = shipmentHistory,
                 loading = loading,
+                shouldAnimateUpOnFirstLaunch = shouldAnimateOnFirstLaunch,
             )
         },
     )

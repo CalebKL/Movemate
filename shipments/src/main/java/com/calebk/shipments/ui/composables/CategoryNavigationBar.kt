@@ -16,6 +16,7 @@
 package com.calebk.shipments.ui.composables
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.EaseInQuart
 import androidx.compose.animation.core.EaseOutQuart
@@ -67,7 +68,7 @@ import com.calebk.shipments.models.Category
 import com.calebk.shipments.models.ShipmentItems
 
 @Composable
-fun ShipmentHistoryScreen(historyItems: List<ShipmentItems>, loading: Boolean, modifier: Modifier) {
+fun ShipmentHistoryScreen(historyItems: List<ShipmentItems>, loading: Boolean, modifier: Modifier, shouldAnimateUpOnFirstLaunch: Boolean) {
     var selectedCategory by remember { mutableStateOf<Category?>(null) }
     var filteredHistory by remember { mutableStateOf(historyItems) }
     var shouldAnimate by remember { mutableStateOf(true) }
@@ -104,72 +105,89 @@ fun ShipmentHistoryScreen(historyItems: List<ShipmentItems>, loading: Boolean, m
                 shouldAnimate = true
             },
         )
-
-        AnimatedContent(
-            targetState = Pair(selectedCategory, filteredHistory),
-            transitionSpec = {
-                (
-                    slideInVertically(
-                        initialOffsetY = { fullHeight -> fullHeight },
-                        animationSpec = tween(
-                            durationMillis = 300,
-                            easing = EaseOutQuart,
-                        ),
-                    ) + fadeIn(animationSpec = tween(300))
-                    ).togetherWith(
-                    slideOutVertically(
-                        targetOffsetY = { fullHeight -> -fullHeight },
-                        animationSpec = tween(
-                            durationMillis = 300,
-                            easing = EaseInQuart,
-                        ),
-                    ) + fadeOut(animationSpec = tween(300)),
-                )
-            },
-            label = "Selection Category",
-        ) { (_, currentFilteredHistory) ->
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 12.dp),
-            ) {
-                item {
-                    Text(
-                        modifier = Modifier.padding(top = 16.dp),
-                        text = stringResource(R.string.shipments),
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
+        AnimatedVisibility(
+            visible = shouldAnimateUpOnFirstLaunch,
+            enter = slideInVertically(
+                initialOffsetY = { fullHeight -> fullHeight },
+                animationSpec = tween(
+                    durationMillis = 500,
+                    easing = EaseOutQuart,
+                ),
+            ) + fadeIn(animationSpec = tween(durationMillis = 500)),
+            exit = slideOutVertically(
+                targetOffsetY = { fullHeight -> fullHeight },
+                animationSpec = tween(
+                    durationMillis = 500,
+                    easing = EaseInQuart,
+                ),
+            ) + fadeOut(animationSpec = tween(durationMillis = 500)),
+        ) {
+            AnimatedContent(
+                targetState = Pair(selectedCategory, filteredHistory),
+                transitionSpec = {
+                    (
+                        slideInVertically(
+                            initialOffsetY = { fullHeight -> fullHeight },
+                            animationSpec = tween(
+                                durationMillis = 300,
+                                easing = EaseOutQuart,
+                            ),
+                        ) + fadeIn(animationSpec = tween(300))
+                        ).togetherWith(
+                        slideOutVertically(
+                            targetOffsetY = { fullHeight -> -fullHeight },
+                            animationSpec = tween(
+                                durationMillis = 300,
+                                easing = EaseInQuart,
+                            ),
+                        ) + fadeOut(animationSpec = tween(300)),
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
-                }
-
-                when {
-                    loading && currentFilteredHistory.isEmpty() -> {
-                        item {
-                            CircularProgressIndicator(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .wrapContentSize(),
-                            )
-                        }
+                },
+                label = "Selection Category",
+            ) { (_, currentFilteredHistory) ->
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 12.dp),
+                ) {
+                    item {
+                        Text(
+                            modifier = Modifier.padding(top = 16.dp),
+                            text = stringResource(R.string.shipments),
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
                     }
 
-                    currentFilteredHistory.isEmpty() -> {
-                        item {
-                            NothingHere()
+                    when {
+                        loading && currentFilteredHistory.isEmpty() -> {
+                            item {
+                                CircularProgressIndicator(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .wrapContentSize(),
+                                )
+                            }
                         }
-                    }
 
-                    else -> {
-                        items(currentFilteredHistory) { item ->
-                            ShipmentHistoryCard(
-                                modifier = Modifier.fillMaxWidth(),
-                                progress = item.category,
-                                trackingNumber = item.id,
-                                shippedFrom = item.shippedFrom,
-                                amount = item.amount,
-                            )
-                            Spacer(modifier = Modifier.height(12.dp))
+                        currentFilteredHistory.isEmpty() -> {
+                            item {
+                                NothingHere()
+                            }
+                        }
+
+                        else -> {
+                            items(currentFilteredHistory) { item ->
+                                ShipmentHistoryCard(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    progress = item.category,
+                                    trackingNumber = item.id,
+                                    shippedFrom = item.shippedFrom,
+                                    amount = item.amount,
+                                )
+                                Spacer(modifier = Modifier.height(12.dp))
+                            }
                         }
                     }
                 }
