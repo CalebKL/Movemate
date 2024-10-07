@@ -47,6 +47,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -162,7 +163,8 @@ fun PricingPageScreen(navigateBackHome: () -> Unit) {
                     .fillMaxWidth()
                     .padding(14.dp)
                     .alpha(textFadeAlpha)
-                    .offset(y = boxSlideOffset.dp),
+                    .offset(y = boxSlideOffset.dp)
+                    .testTag("Back Home"),
                 onClick = {
                     navigateBackHome()
                 },

@@ -52,6 +52,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.calebk.shipments.R
@@ -158,7 +159,8 @@ fun HomeScreen(
                             modifier = Modifier
                                 .padding(it)
                                 .background(Color.White)
-                                .padding(start = 12.dp, end = 12.dp, bottom = 12.dp),
+                                .padding(start = 12.dp, end = 12.dp, bottom = 12.dp)
+                                .testTag("Searchable Items"),
                             colors = CardColors(
                                 contentColor = Color(0xFF858585),
                                 containerColor = Color.White,

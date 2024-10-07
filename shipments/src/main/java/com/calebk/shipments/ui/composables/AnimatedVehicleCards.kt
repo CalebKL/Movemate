@@ -28,6 +28,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.calebk.shipments.models.vehicleItems
 
@@ -35,7 +36,8 @@ import com.calebk.shipments.models.vehicleItems
 fun AnimatedVehicleCards(shouldAnimate: Boolean) {
     LazyRow(
         modifier = Modifier
-            .padding(16.dp),
+            .padding(16.dp)
+            .testTag("vehicles row"),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         items(vehicleItems) { item ->

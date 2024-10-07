@@ -39,6 +39,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -90,7 +91,8 @@ fun ShipmentScreen(shipmentHistory: List<ShipmentItems>, loading: Boolean, navig
                 LazyColumn(
                     modifier = Modifier
                         .padding(it)
-                        .padding(start = 12.dp, end = 12.dp),
+                        .padding(start = 12.dp, end = 12.dp)
+                        .testTag("ShipmentHistoryCard"),
                 ) {
                     item {
                         Text(
