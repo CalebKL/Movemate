@@ -120,30 +120,6 @@ class ShipmentRepoImpl : ShipmentRepo {
                 category = Category.PENDING,
                 amount = "$650 USD",
             ),
-            ShipmentItems(
-                id = "#NEJ68957487535898",
-                name = "Macbook Pro M2",
-                shippedFrom = "Atlanta",
-                deliveryAddress = "Morocco",
-                category = Category.PENDING,
-                amount = "$650 USD",
-            ),
-            ShipmentItems(
-                id = "#NEJ68957487535898",
-                name = "Macbook Pro M2",
-                shippedFrom = "Atlanta",
-                deliveryAddress = "Morocco",
-                category = Category.PENDING,
-                amount = "$650 USD",
-            ),
-            ShipmentItems(
-                id = "#NEJ68957487535898",
-                name = "Macbook Pro M2",
-                shippedFrom = "Atlanta",
-                deliveryAddress = "Morocco",
-                category = Category.PENDING,
-                amount = "$650 USD",
-            ),
         )
         emit(data)
     }
