@@ -46,4 +46,7 @@
     <string name="categories">Categories</string>
     <string name="calculate">Calculate</string>
     <string name="destination">Destination</string>
+    <string name="arriving_today">Arriving Today!</string>
+    <string name="sep_20_2023">Sep 20, 2023</string>
+    <string name="your_delivery_from_is_arriving_today">Your delivery, %1$s from %2$s, is arriving today.</string>
 </resources>

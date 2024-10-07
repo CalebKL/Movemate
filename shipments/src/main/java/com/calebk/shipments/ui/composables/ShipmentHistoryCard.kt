@@ -42,6 +42,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -137,13 +138,13 @@ fun ShipmentHistoryCard(modifier: Modifier = Modifier, progress: Category, track
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Arriving Today!",
+                    text = stringResource(R.string.arriving_today),
                     style = MaterialTheme.typography.titleMedium,
                     color = Color.Black,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "Your delivery, $trackingNumber from $shippedFrom, is arriving today.",
+                    text = stringResource(R.string.your_delivery_from_is_arriving_today, trackingNumber, shippedFrom),
                     style = MaterialTheme.typography.bodyMedium,
                 )
                 Spacer(modifier = Modifier.height(10.dp))
@@ -162,7 +163,7 @@ fun ShipmentHistoryCard(modifier: Modifier = Modifier, progress: Category, track
                             .background(Color(0xFF858585)),
                     )
                     Spacer(modifier = Modifier.width(4.dp))
-                    Text(text = "Sep 20, 2023", style = MaterialTheme.typography.bodyMedium)
+                    Text(text = stringResource(R.string.sep_20_2023), style = MaterialTheme.typography.bodyMedium)
                 }
             }
             Image(
