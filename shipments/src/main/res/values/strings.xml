@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright 2024 Movemate, Inc. All Rights Reserved.
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources>
+    <string name="shipment_number">Shipment Number</string>
+    <string name="shipment_identity">NEJ0009090909032621</string>
+    <string name="sender">Sender</string>
+    <string name="atlanta">Atlanta, 5243</string>
+    <string name="time">Time</string>
+    <string name="_2_day_3_days">2 day - 3 days</string>
+    <string name="receiver">Receiver</string>
+    <string name="chicago">Chicago, 6342</string>
+    <string name="status">Status</string>
+    <string name="waiting_to_collect">Waiting to Collect</string>
+    <string name="add_stop">Add Stop</string>
+    <string name="available_vehicles">Available Vehicles</string>
+    <string name="your_location">Your location</string>
+    <string name="wertheimer_illinois">Wertheimer, Illinois</string>
+    <string name="nothing_illustration">"¯\\\\_(ツ)_/¯ "</string>
+    <string name="there_is_no_data_to_display_at_the_moment">There is no data to display at the moment.</string>
+    <string name="tracking">Tracking</string>
+    <string name="shipments">Shipments</string>
+    <string name="navigate_back">Navigate back</string>
+    <string name="shipment_history">Shipment History</string>
+    <string name="total_estimated_amount">Total Estimated Amount</string>
+    <string name="amount_may_vary_description">This amount is estimated to vary if you change your location or weight</string>
+    <string name="back_home">Back to Home</string>
+    <string name="sender_location">Sender Location</string>
+    <string name="receiver_location">Receiver Location</string>
+    <string name="approx_weight">Approx weight</string>
+    <string name="packaging">Packaging</string>
+    <string name="what_are_you_sending">What are you sending?</string>
+    <string name="categories">Categories</string>
+    <string name="calculate">Calculate</string>
+    <string name="destination">Destination</string>
+</resources>

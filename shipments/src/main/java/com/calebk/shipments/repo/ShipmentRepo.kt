@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.calebk.movemate.ui.theme
+package com.calebk.shipments.repo
 
-import androidx.compose.ui.graphics.Color
+import com.calebk.shipments.models.ShipmentItems
+import kotlinx.coroutines.flow.Flow
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
-
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+interface ShipmentRepo {
+    fun getShipmentHistory(): Flow<List<ShipmentItems>>
+    fun getShipmentList(): Flow<List<ShipmentItems>>
+}
