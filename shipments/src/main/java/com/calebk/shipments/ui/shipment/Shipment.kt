@@ -16,22 +16,22 @@
 package com.calebk.shipments.ui.shipment
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.EaseInQuart
-import androidx.compose.animation.core.EaseOutQuart
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -39,21 +39,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.calebk.shipments.R
 import com.calebk.shipments.models.ShipmentItems
-import com.calebk.shipments.ui.composables.NothingHere
-import com.calebk.shipments.ui.composables.ShipmentHeader
-import com.calebk.shipments.ui.composables.ShipmentHistoryCard
+import com.calebk.shipments.ui.composables.ShipmentHistoryScreen
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ShipmentScreen(shipmentHistory: List<ShipmentItems>, loading: Boolean, navigateBackHome: () -> Unit) {
-    var filteredHistory by remember { mutableStateOf(shipmentHistory) }
-
     var shouldAnimate by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
@@ -62,74 +59,58 @@ fun ShipmentScreen(shipmentHistory: List<ShipmentItems>, loading: Boolean, navig
 
     Scaffold(
         topBar = {
-            ShipmentHeader(
-                historyItems = shipmentHistory,
-                onFilteredItemsChanged = { filtered ->
-                    filteredHistory = filtered
+            CenterAlignedTopAppBar(
+                modifier = Modifier
+                    .background(Color(0xFF5f57bc)),
+                colors = TopAppBarColors(
+                    containerColor = Color(0xFF5f57bc),
+                    navigationIconContentColor = Color.White,
+                    titleContentColor = Color.White,
+                    actionIconContentColor = Color.White,
+                    scrolledContainerColor = Color.White,
+                ),
+                title = {
+                    AnimatedVisibility(
+                        visible = shouldAnimate,
+                        enter = slideInVertically(
+                            initialOffsetY = { it },
+                            animationSpec = tween(durationMillis = 300, easing = LinearEasing),
+                        ),
+                    ) {
+                        Text(
+                            text = stringResource(R.string.shipment_history),
+                            color = Color.White,
+                            style = MaterialTheme.typography.titleMedium,
+                            textAlign = TextAlign.Center,
+                        )
+                    }
                 },
-                navigateBackHome = navigateBackHome,
+                navigationIcon = {
+                    AnimatedVisibility(shouldAnimate) {
+                        IconButton(
+                            modifier = Modifier
+                                .padding(start = 12.dp)
+                                .size(20.dp)
+                                .testTag("Back Button"),
+                            onClick = navigateBackHome,
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowBackIosNew,
+                                tint = Color.White,
+                                contentDescription = stringResource(R.string.navigate_back),
+                            )
+                        }
+                    }
+                },
+
             )
         },
         content = {
-            AnimatedVisibility(
-                visible = shouldAnimate,
-                enter = slideInVertically(
-                    initialOffsetY = { fullHeight -> fullHeight },
-                    animationSpec = tween(
-                        durationMillis = 500,
-                        easing = EaseOutQuart,
-                    ),
-                ) + fadeIn(animationSpec = tween(durationMillis = 500)),
-                exit = slideOutVertically(
-                    targetOffsetY = { fullHeight -> fullHeight },
-                    animationSpec = tween(
-                        durationMillis = 500,
-                        easing = EaseInQuart,
-                    ),
-                ) + fadeOut(animationSpec = tween(durationMillis = 500)),
-            ) {
-                LazyColumn(
-                    modifier = Modifier
-                        .padding(it)
-                        .padding(start = 12.dp, end = 12.dp)
-                        .testTag("ShipmentHistoryCard"),
-                ) {
-                    item {
-                        Text(
-                            modifier = Modifier.padding(top = 16.dp),
-                            text = stringResource(R.string.shipments),
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                        )
-
-                        Spacer(modifier = Modifier.padding(8.dp))
-                    }
-                    when {
-                        loading && shipmentHistory.isEmpty() -> {
-                            item {
-                                CircularProgressIndicator()
-                            }
-                        }
-                        filteredHistory.isEmpty() -> {
-                            item {
-                                NothingHere()
-                            }
-                        }
-                        else -> {
-                            items(filteredHistory) { item ->
-                                ShipmentHistoryCard(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    progress = item.category,
-                                    trackingNumber = item.id,
-                                    shippedFrom = item.shippedFrom,
-                                    amount = item.amount,
-                                )
-                                Spacer(modifier = Modifier.height(12.dp))
-                            }
-                        }
-                    }
-                }
-            }
+            ShipmentHistoryScreen(
+                modifier = Modifier.padding(it),
+                historyItems = shipmentHistory,
+                loading = loading,
+            )
         },
     )
 }

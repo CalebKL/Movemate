@@ -15,6 +15,17 @@
  */
 package com.calebk.shipments.ui.composables
 
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.EaseInQuart
+import androidx.compose.animation.core.EaseOutQuart
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -22,17 +33,24 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,20 +58,132 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.calebk.shipments.R
 import com.calebk.shipments.models.Category
 import com.calebk.shipments.models.ShipmentItems
 
 @Composable
-fun CategoryNavigationBar(historyItems: List<ShipmentItems>, onCategorySelected: (Category?) -> List<ShipmentItems>) {
+fun ShipmentHistoryScreen(historyItems: List<ShipmentItems>, loading: Boolean, modifier: Modifier) {
+    var selectedCategory by remember { mutableStateOf<Category?>(null) }
+    var filteredHistory by remember { mutableStateOf(historyItems) }
+    var shouldAnimate by remember { mutableStateOf(true) }
+    val rowOffset = remember { Animatable(100f) }
+
+    LaunchedEffect(Unit) {
+        rowOffset.animateTo(
+            targetValue = 0f,
+            animationSpec = tween(
+                durationMillis = 500,
+                easing = FastOutSlowInEasing,
+            ),
+        )
+    }
+
+    Column(
+        modifier = modifier,
+    ) {
+        CategoryNavigationBar(
+            modifier = Modifier
+                .fillMaxWidth()
+                .horizontalScroll(rememberScrollState())
+                .background(Color(0xFF5f57bc))
+                .padding(horizontal = 8.dp)
+                .offset(x = rowOffset.value.dp),
+            historyItems = historyItems,
+            onCategorySelected = { category ->
+                selectedCategory = category
+                filteredHistory = if (category == null) {
+                    historyItems
+                } else {
+                    historyItems.filter { it.category == category }
+                }
+                shouldAnimate = true
+            },
+        )
+
+        AnimatedContent(
+            targetState = Pair(selectedCategory, filteredHistory),
+            transitionSpec = {
+                (
+                    slideInVertically(
+                        initialOffsetY = { fullHeight -> fullHeight },
+                        animationSpec = tween(
+                            durationMillis = 300,
+                            easing = EaseOutQuart,
+                        ),
+                    ) + fadeIn(animationSpec = tween(300))
+                    ).togetherWith(
+                    slideOutVertically(
+                        targetOffsetY = { fullHeight -> -fullHeight },
+                        animationSpec = tween(
+                            durationMillis = 300,
+                            easing = EaseInQuart,
+                        ),
+                    ) + fadeOut(animationSpec = tween(300)),
+                )
+            },
+            label = "Selection Category",
+        ) { (_, currentFilteredHistory) ->
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 12.dp),
+            ) {
+                item {
+                    Text(
+                        modifier = Modifier.padding(top = 16.dp),
+                        text = stringResource(R.string.shipments),
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+
+                when {
+                    loading && currentFilteredHistory.isEmpty() -> {
+                        item {
+                            CircularProgressIndicator(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .wrapContentSize(),
+                            )
+                        }
+                    }
+
+                    currentFilteredHistory.isEmpty() -> {
+                        item {
+                            NothingHere()
+                        }
+                    }
+
+                    else -> {
+                        items(currentFilteredHistory) { item ->
+                            ShipmentHistoryCard(
+                                modifier = Modifier.fillMaxWidth(),
+                                progress = item.category,
+                                trackingNumber = item.id,
+                                shippedFrom = item.shippedFrom,
+                                amount = item.amount,
+                            )
+                            Spacer(modifier = Modifier.height(12.dp))
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun CategoryNavigationBar(modifier: Modifier = Modifier, historyItems: List<ShipmentItems>, onCategorySelected: (Category?) -> Unit) {
     var selectedCategory by remember { mutableStateOf<Category?>(null) }
 
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .horizontalScroll(rememberScrollState())
-            .background(Color(0xFF5f57bc))
-            .padding(horizontal = 8.dp),
+        modifier = modifier,
     ) {
         CategoryTab(
             categoryName = "All",
@@ -64,7 +194,6 @@ fun CategoryNavigationBar(historyItems: List<ShipmentItems>, onCategorySelected:
                 onCategorySelected(null)
             },
         )
-        // Individual category tabs with filtered counts
         Category.entries.forEach { category ->
             val categoryCount = historyItems.count { it.category == category }
             CategoryTab(
@@ -83,7 +212,8 @@ fun CategoryNavigationBar(historyItems: List<ShipmentItems>, onCategorySelected:
 @Composable
 private fun CategoryTab(count: Int, categoryName: String, isSelected: Boolean, onCategorySelected: () -> Unit) {
     Column(
-        modifier = Modifier.clickable(onClick = onCategorySelected),
+        modifier = Modifier
+            .clickable(onClick = onCategorySelected),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         CategoryLabel(

@@ -68,8 +68,9 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
         containerColor = Color(0xFF858585).copy(alpha = 0.1f),
         topBar = {
             CalculateTopAppBar(
-                Modifier
+                modifier = Modifier
                     .background(Color(0xFF5f57bc)),
+                shouldAnimate = shouldAnimate,
                 navigateBackHome = navigateBackHome,
             )
         },

@@ -15,6 +15,10 @@
  */
 package com.calebk.shipments.ui.composables
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInVertically
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -27,10 +31,12 @@ import androidx.compose.material3.TopAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import com.calebk.shipments.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CalculateTopAppBar(modifier: Modifier = Modifier, navigateBackHome: () -> Unit) {
+fun CalculateTopAppBar(shouldAnimate: Boolean, modifier: Modifier = Modifier, navigateBackHome: () -> Unit) {
     CenterAlignedTopAppBar(
         modifier = modifier,
         colors = TopAppBarColors(
@@ -41,23 +47,33 @@ fun CalculateTopAppBar(modifier: Modifier = Modifier, navigateBackHome: () -> Un
             actionIconContentColor = Color.White,
         ),
         title = {
-            Text(
-                text = "Calculate",
-                style = MaterialTheme.typography.titleMedium,
-                color = Color.White,
-            )
+            AnimatedVisibility(
+                visible = shouldAnimate,
+                enter = slideInVertically(
+                    initialOffsetY = { it },
+                    animationSpec = tween(durationMillis = 300, easing = LinearEasing),
+                ),
+            ) {
+                Text(
+                    text = stringResource(R.string.calculate),
+                    style = MaterialTheme.typography.titleMedium,
+                    color = Color.White,
+                )
+            }
         },
         navigationIcon = {
-            IconButton(
-                onClick = {
-                    navigateBackHome()
-                },
-            ) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBackIosNew,
-                    tint = Color.White,
-                    contentDescription = null,
-                )
+            AnimatedVisibility(shouldAnimate) {
+                IconButton(
+                    onClick = {
+                        navigateBackHome()
+                    },
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBackIosNew,
+                        tint = Color.White,
+                        contentDescription = null,
+                    )
+                }
             }
         },
     )

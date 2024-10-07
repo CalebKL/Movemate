@@ -41,7 +41,10 @@ class ShipmentViewmodel(private val repo: ShipmentRepo) : ViewModel() {
         viewModelScope.launch {
             repo.getShipmentHistory()
                 .onStart { _isLoading.update { true } }
-                .collect { items -> _historyItems.update { items } }
+                .collect { items ->
+                    _isLoading.update { false }
+                    _historyItems.update { items }
+                }
         }
     }
     companion object {
