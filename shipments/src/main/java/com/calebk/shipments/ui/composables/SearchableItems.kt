@@ -30,8 +30,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.IndeterminateCheckBox
-import androidx.compose.material3.CardColors
-import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.DividerDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -45,17 +45,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SearchableItems(modifier: Modifier = Modifier, shipmentItemName: String, shipmentItemId: String, shippedFrom: String, deliveryAddress: String) {
-    ElevatedCard(
-        modifier = Modifier
-            .background(Color.White)
-            .padding(start = 12.dp, end = 12.dp),
-        colors = CardColors(
-            contentColor = Color(0xFF858585),
-            containerColor = Color.White,
-            disabledContentColor = Color.Black,
-            disabledContainerColor = Color.Black,
-        ),
-    ) {
+    Column {
         Row(
             Modifier
                 .fillMaxWidth()
@@ -116,5 +106,9 @@ fun SearchableItems(modifier: Modifier = Modifier, shipmentItemName: String, shi
                 }
             }
         }
+        HorizontalDivider(
+            color = DividerDefaults.color.copy(alpha = 0.4f),
+            modifier = Modifier.padding(start = 8.dp, end = 8.dp),
+        )
     }
 }

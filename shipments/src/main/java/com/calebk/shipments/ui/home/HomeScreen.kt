@@ -27,6 +27,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -34,7 +35,9 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -143,21 +146,36 @@ fun HomeScreen(
                     ),
                 ) + fadeOut(animationSpec = tween(durationMillis = 500)),
             ) {
-                if (loading && shipmentList.isEmpty()) {
-                    CircularProgressIndicator()
-                } else if (shipmentList.isEmpty()) {
-                    NothingHere()
-                } else {
-                    LazyColumn(
-                        Modifier.padding(it),
-                    ) {
-                        items(shipmentList) { item ->
-                            SearchableItems(
-                                shipmentItemName = item.name,
-                                shipmentItemId = item.id,
-                                shippedFrom = item.shippedFrom,
-                                deliveryAddress = item.deliveryAddress,
-                            )
+                Column(
+                    modifier = Modifier.padding(top = 16.dp),
+                ) {
+                    if (loading && shipmentList.isEmpty()) {
+                        CircularProgressIndicator()
+                    } else if (shipmentList.isEmpty()) {
+                        NothingHere()
+                    } else {
+                        ElevatedCard(
+                            modifier = Modifier
+                                .padding(it)
+                                .background(Color.White)
+                                .padding(start = 12.dp, end = 12.dp, bottom = 12.dp),
+                            colors = CardColors(
+                                contentColor = Color(0xFF858585),
+                                containerColor = Color.White,
+                                disabledContentColor = Color.Black,
+                                disabledContainerColor = Color.Black,
+                            ),
+                        ) {
+                            LazyColumn {
+                                items(shipmentList) { item ->
+                                    SearchableItems(
+                                        shipmentItemName = item.name,
+                                        shipmentItemId = item.id,
+                                        shippedFrom = item.shippedFrom,
+                                        deliveryAddress = item.deliveryAddress,
+                                    )
+                                }
+                            }
                         }
                     }
                 }
