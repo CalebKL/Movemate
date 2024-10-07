@@ -153,18 +153,13 @@ private fun ChipContent(isSelected: Boolean, category: FilterCategory) {
 
 enum class FilterCategory(val filterName: String) {
     DOCUMENTS("Documents"),
-    GLASS("glass"),
+    GLASS("Glass"),
     LIQUID("Liquid"),
     FOOD("Food"),
-    ELECTRONICS("Electronics"),
+    ELECTRONICS("Electronic"),
     PRODUCTS("Product"),
     MISCELLANEOUS("Others"),
 }
-
-data class ChipColors(
-//    val textColor: Int,
-    val backgroundColor: Color,
-)
 
 private object Dimensions {
     val CHIP_SPACING = 4.dp

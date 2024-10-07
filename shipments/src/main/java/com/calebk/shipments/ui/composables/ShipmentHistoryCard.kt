@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -52,7 +51,7 @@ import com.calebk.shipments.models.Category
 @Composable
 fun ShipmentHistoryCard(modifier: Modifier = Modifier, progress: Category, trackingNumber: String, shippedFrom: String, amount: String) {
     OutlinedCard(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier,
         colors = CardColors(
             contentColor = Color(0xFF858585),
             containerColor = Color.White,

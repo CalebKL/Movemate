@@ -46,7 +46,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.calebk.shipments.R
 import com.calebk.shipments.ui.composables.CalculateTopAppBar
 import com.calebk.shipments.ui.composables.FilterChipsSection
@@ -86,7 +88,8 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
                     Text(
                         modifier = Modifier.padding(start = 24.dp, top = 18.dp),
                         text = stringResource(R.string.destination),
-                        style = MaterialTheme.typography.titleMedium,
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
                     )
                 }
                 AnimatedVisibility(
@@ -108,7 +111,7 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
                         ),
                     ) {
                         Column(
-                            modifier = Modifier.padding(horizontal = 8.dp),
+                            modifier = Modifier.padding(12.dp),
                         ) {
                             UserInputFields(
                                 modifier = Modifier
@@ -139,12 +142,13 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
                 Text(
                     modifier = Modifier.padding(start = 18.dp),
                     text = stringResource(R.string.packaging),
-                    style = MaterialTheme.typography.titleMedium,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
                 )
                 Text(
                     modifier = Modifier.padding(start = 18.dp),
                     text = stringResource(R.string.what_are_you_sending),
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodyLarge,
                     color = Color(0xFF858585),
                 )
                 SendingItemCard(
@@ -155,15 +159,16 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
                 Text(
                     modifier = Modifier.padding(start = 18.dp),
                     text = stringResource(R.string.categories),
-                    style = MaterialTheme.typography.titleMedium,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
                 )
                 Text(
                     modifier = Modifier.padding(start = 18.dp),
                     text = stringResource(R.string.what_are_you_sending),
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.bodyLarge,
                     color = Color(0xFF858585),
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(12.dp))
                 Column(
                     modifier = Modifier.fillMaxHeight(),
                     verticalArrangement = Arrangement.SpaceBetween,

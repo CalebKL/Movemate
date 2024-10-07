@@ -24,12 +24,12 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,7 +40,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.calebk.shipments.R
 import com.calebk.shipments.models.ShipmentItems
 import com.calebk.shipments.ui.composables.NothingHere
@@ -94,8 +96,10 @@ fun ShipmentScreen(shipmentHistory: List<ShipmentItems>, loading: Boolean, navig
                         Text(
                             modifier = Modifier.padding(top = 16.dp),
                             text = stringResource(R.string.shipments),
-                            style = MaterialTheme.typography.titleMedium,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
                         )
+
                         Spacer(modifier = Modifier.padding(8.dp))
                     }
                     when {
@@ -112,6 +116,7 @@ fun ShipmentScreen(shipmentHistory: List<ShipmentItems>, loading: Boolean, navig
                         else -> {
                             items(filteredHistory) { item ->
                                 ShipmentHistoryCard(
+                                    modifier = Modifier.fillMaxWidth(),
                                     progress = item.category,
                                     trackingNumber = item.id,
                                     shippedFrom = item.shippedFrom,
