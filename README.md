@@ -15,17 +15,21 @@ The final app looks like this:👀
   - This is the first screen which displays the User Profile, Tracking Numbers and available Vehicles
   - A User can also search a receipt number and a list of shipment details will be displayed
   - The User can also navigate to Calculate, Shipment and Profile Pages
-  - 
-- **Calculate Screen**:
-  - A user can enter inputs for the Sender's Location, Receiver Location  and Approx. Weight. 
-  - The User can also select different categories from the FlowRow eg. (Electronics). 
-  - Finally, the calculate buttons navigates to the Pricing Screen which displays the Total Amount 
-  
+
 - **Shipment Screen**:
   - On this Screen, the user can see a list different shipment History
   - The User will be able to scroll up and down on the different shipments
   - The user can be able to filter different shipments like ("All, Completed, Pending, Cancelled, In-Progress)
   - Proper State-handling has been implemented, when the data is loading, empty and if the data has been retrieved. 
+  
+- **Calculate Screen**:
+  - A user can enter inputs for the Sender's Location, Receiver Location  and Approx. Weight.
+  - The User can also select different categories from the FlowRow eg. (Electronics).
+  - Finally, the calculate button navigates to the Pricing Screen which displays the Total Amount
+
+- **Pricing Screen**:
+  - The Pricing screen pops up when the user has pressed the calculation button 
+  - The page shows the total estimated price for the shipment. 
 
 *Environment*
 - Built on A.S Ladybug | 2024.2.1
