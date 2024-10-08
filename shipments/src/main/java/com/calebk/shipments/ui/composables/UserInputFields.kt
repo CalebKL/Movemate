@@ -55,7 +55,7 @@ fun UserInputFields(modifier: Modifier, icon: ImageVector, placeHolder: String) 
     val focusManager = LocalFocusManager.current
     var text by remember { mutableStateOf("") }
     Box(
-        modifier = modifier
+        modifier = modifier,
     ) {
         Row(
             horizontalArrangement = Arrangement.Center,

@@ -149,10 +149,10 @@ fun ShipmentHistoryCard(modifier: Modifier = Modifier, progress: Category, track
                     style = MaterialTheme.typography.bodyMedium,
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                Row (
+                Row(
                     horizontalArrangement = Arrangement.Center,
-                    verticalAlignment = Alignment.CenterVertically
-                ){
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
                     Text(
                         text = amount,
                         color = MaterialTheme.colorScheme.primary,
