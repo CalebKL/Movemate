@@ -59,6 +59,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -93,7 +94,8 @@ fun ShipmentHistoryScreen(historyItems: List<ShipmentItems>, loading: Boolean, m
                 .horizontalScroll(rememberScrollState())
                 .background(Color(0xFF5f57bc))
                 .padding(horizontal = 8.dp)
-                .offset(x = rowOffset.value.dp),
+                .offset(x = rowOffset.value.dp)
+                .testTag("Navigation bar Items"),
             historyItems = historyItems,
             onCategorySelected = { category ->
                 selectedCategory = category

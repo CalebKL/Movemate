@@ -26,7 +26,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.calebk.shipments.models.ShipmentItems
 
@@ -47,8 +46,7 @@ fun AnimatedCategoryNavigationBar(historyItems: List<ShipmentItems>, onFilteredI
     Box(
         modifier = Modifier
             .background(Color(0xFF5f57bc))
-            .offset(x = tabRowOffset.value.dp)
-            .testTag("Navigation bar Items"),
+            .offset(x = tabRowOffset.value.dp),
     ) {
         CategoryNavigationBar(
             historyItems = historyItems,

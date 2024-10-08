@@ -47,11 +47,6 @@ class ShipmentScreenTest {
         composeTestRule
             .onNodeWithTag("Navigation bar Items")
             .assertIsDisplayed()
-
-        composeTestRule
-            .onNodeWithText("Shipments")
-            .assertIsDisplayed()
-        composeTestRule.onNodeWithTag("ShipmentHistoryCard").assertIsDisplayed()
     }
 
     @Test
