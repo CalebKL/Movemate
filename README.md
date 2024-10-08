@@ -51,10 +51,9 @@ The folders are split in two main modules: Feature Module and App Module:
 - **App Module**:
   This app module is the main entry point to the application and handles the navigation logic to navigate from the Home Screen to Calculate or the Shipments page and back.
   
-- **Testing**
+**Testing**
 
 Compose tests have been added on the shipments module(AndroidTests) where the the Home Screen, Shipments Screen, Calculate Screens and Pricing Screen has been tested. Navigating from one screen to another has also been covered from the tests. 
-Unit tests have also been added on the shipment module(tests) to test the repository logic
 
 ## Tech-stack
 
