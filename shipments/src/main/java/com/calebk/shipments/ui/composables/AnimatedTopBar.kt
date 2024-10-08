@@ -16,6 +16,8 @@
 package com.calebk.shipments.ui.composables
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -23,12 +25,16 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import kotlin.math.roundToInt
 
 @Composable
 fun AnimatedTopBar(
@@ -40,6 +46,15 @@ fun AnimatedTopBar(
     modifier: Modifier = Modifier,
     onReadyToSearch: (Boolean) -> Unit = {},
 ) {
+    val offsetY by animateFloatAsState(
+        targetValue = if (showSearchContent) 0f else 1f,
+        animationSpec = tween(
+            durationMillis = 500,
+            easing = LinearOutSlowInEasing,
+        ),
+        label = "offsetY",
+    )
+
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -48,8 +63,8 @@ fun AnimatedTopBar(
         AnimatedContent(
             targetState = showSearchContent,
             transitionSpec = {
-                fadeIn(animationSpec = tween(300)) togetherWith
-                    fadeOut(animationSpec = tween(300))
+                fadeIn(animationSpec = tween(500, easing = LinearOutSlowInEasing)) togetherWith
+                    fadeOut(animationSpec = tween(500, easing = LinearOutSlowInEasing))
             },
             label = "TopBar Animation",
         ) { isSearchVisible ->
@@ -59,7 +74,8 @@ fun AnimatedTopBar(
                         .fillMaxWidth()
                         .background(MaterialTheme.colorScheme.primary)
                         .padding(top = 40.dp, bottom = 20.dp)
-                        .padding(horizontal = 16.dp),
+                        .padding(horizontal = 16.dp)
+                        .offset { IntOffset(0, (offsetY * 200f).roundToInt()) },
                     searchQuery = searchQuery,
                     onSearchQueryChange = onSearchQueryChange,
                     navigateBackHome = navigateBackHome,
@@ -68,7 +84,8 @@ fun AnimatedTopBar(
                 )
             } else {
                 HeaderSection(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .background(MaterialTheme.colorScheme.primary)
                         .padding(top = 40.dp)
                         .padding(horizontal = 16.dp),
