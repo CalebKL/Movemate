@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.FilePresent
@@ -46,6 +47,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -122,6 +124,8 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
                         ) {
                             UserInputFields(
                                 modifier = Modifier
+                                    .clip(RoundedCornerShape(10.dp))
+                                    .fillMaxWidth()
                                     .background(color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f))
                                     .padding(18.dp),
                                 icon = Icons.Default.UploadFile,
@@ -130,6 +134,8 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
                             Spacer(modifier = Modifier.height(8.dp))
                             UserInputFields(
                                 modifier = Modifier
+                                    .clip(RoundedCornerShape(10.dp))
+                                    .fillMaxWidth()
                                     .background(color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f))
                                     .padding(18.dp),
                                 icon = Icons.Default.FilePresent,
@@ -138,6 +144,8 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
                             Spacer(modifier = Modifier.height(8.dp))
                             UserInputFields(
                                 modifier = Modifier
+                                    .clip(RoundedCornerShape(10.dp))
+                                    .fillMaxWidth()
                                     .background(color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f))
                                     .padding(18.dp),
                                 icon = Icons.Default.HourglassTop,

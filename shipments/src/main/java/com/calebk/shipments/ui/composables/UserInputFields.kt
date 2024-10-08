@@ -17,6 +17,7 @@ package com.calebk.shipments.ui.composables
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -53,54 +54,57 @@ fun UserInputFields(modifier: Modifier, icon: ImageVector, placeHolder: String) 
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
     var text by remember { mutableStateOf("") }
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.Center,
+    Box(
+        modifier = modifier
     ) {
-        Icon(
-            modifier = Modifier.size(32.dp),
-            imageVector = icon,
-            contentDescription = null,
-        )
-        Spacer(Modifier.width(8.dp))
-        VerticalDivider(
-            modifier = Modifier
-                .width(1.dp)
-                .height(32.dp),
-        )
-        Spacer(Modifier.width(8.dp))
-        BasicTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .focusRequester(focusRequester)
-                .onFocusChanged { focusState = it.isFocused }
-                .clickable {
-                    focusRequester.requestFocus()
+        Row(
+            horizontalArrangement = Arrangement.Center,
+        ) {
+            Icon(
+                modifier = Modifier.size(32.dp),
+                imageVector = icon,
+                contentDescription = null,
+            )
+            Spacer(Modifier.width(8.dp))
+            VerticalDivider(
+                modifier = Modifier
+                    .width(1.dp)
+                    .height(32.dp),
+            )
+            Spacer(Modifier.width(8.dp))
+            BasicTextField(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .focusRequester(focusRequester)
+                    .onFocusChanged { focusState = it.isFocused }
+                    .clickable {
+                        focusRequester.requestFocus()
+                    },
+                value = text,
+                decorationBox = { decoration ->
+                    if (text.isEmpty()) {
+                        Text(
+                            text = placeHolder,
+                            color = MaterialTheme.colorScheme.secondary,
+                        )
+                    } else {
+                        decoration()
+                    }
                 },
-            value = text,
-            decorationBox = { decoration ->
-                if (text.isEmpty()) {
-                    Text(
-                        text = placeHolder,
-                        color = MaterialTheme.colorScheme.secondary,
-                    )
-                } else {
-                    decoration()
-                }
-            },
-            onValueChange = { textChanged ->
-                text = textChanged
-            },
-            keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Done,
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    focusManager.clearFocus()
+                onValueChange = { textChanged ->
+                    text = textChanged
                 },
-            ),
-            singleLine = true,
-            textStyle = TextStyle(color = Color.Black, fontSize = 18.sp, lineHeight = 26.sp),
-        )
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Done,
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        focusManager.clearFocus()
+                    },
+                ),
+                singleLine = true,
+                textStyle = TextStyle(color = Color.Black, fontSize = 18.sp, lineHeight = 26.sp),
+            )
+        }
     }
 }
