@@ -126,8 +126,8 @@ fun SearchBar(
                     }
                 },
                 textStyle = TextStyle(
-                    color = Color.Black
-                )
+                    color = Color.Black,
+                ),
             )
         }
     }
