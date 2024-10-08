@@ -39,7 +39,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
@@ -55,7 +54,7 @@ fun SearchableItems(modifier: Modifier = Modifier, shipmentItemName: String, shi
             Icon(
                 modifier = Modifier.size(36.dp),
                 imageVector = Icons.Default.IndeterminateCheckBox,
-                tint = Color(0xFF5f57bc),
+                tint = MaterialTheme.colorScheme.primary,
                 contentDescription = null,
             )
             Column(
@@ -76,7 +75,7 @@ fun SearchableItems(modifier: Modifier = Modifier, shipmentItemName: String, shi
                 ) {
                     Text(
                         text = shipmentItemId,
-                        color = Color(0xFF858585),
+                        color = MaterialTheme.colorScheme.secondary,
                         style = MaterialTheme.typography.bodyMedium,
                     )
                     Spacer(modifier = Modifier.width(4.dp))
@@ -84,23 +83,23 @@ fun SearchableItems(modifier: Modifier = Modifier, shipmentItemName: String, shi
                         Modifier
                             .size(4.dp)
                             .clip(CircleShape)
-                            .background(Color(0xFF858585)),
+                            .background(MaterialTheme.colorScheme.secondary),
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = shippedFrom,
-                        color = Color(0xFF858585),
+                        color = MaterialTheme.colorScheme.secondary,
                         style = MaterialTheme.typography.bodyMedium,
                     )
                     Icon(
                         modifier = Modifier.size(14.dp),
                         imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                         contentDescription = null,
-                        tint = Color(0xFF858585),
+                        tint = MaterialTheme.colorScheme.secondary,
                     )
                     Text(
                         text = deliveryAddress,
-                        color = Color(0xFF858585),
+                        color = MaterialTheme.colorScheme.secondary,
                         style = MaterialTheme.typography.bodyMedium,
                     )
                 }

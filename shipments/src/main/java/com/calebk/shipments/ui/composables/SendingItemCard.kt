@@ -43,7 +43,7 @@ fun SendingItemCard(modifier: Modifier = Modifier) {
     ElevatedCard(
         modifier = modifier,
         colors = CardColors(
-            contentColor = Color(0xFF858585),
+            contentColor = MaterialTheme.colorScheme.secondary,
             containerColor = Color.White,
             disabledContentColor = Color.Black,
             disabledContainerColor = Color.Black,

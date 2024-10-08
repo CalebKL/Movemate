@@ -61,9 +61,9 @@ fun ShipmentScreen(shipmentHistory: List<ShipmentItems>, loading: Boolean, navig
         topBar = {
             CenterAlignedTopAppBar(
                 modifier = Modifier
-                    .background(Color(0xFF5f57bc)),
+                    .background(MaterialTheme.colorScheme.primary),
                 colors = TopAppBarColors(
-                    containerColor = Color(0xFF5f57bc),
+                    containerColor = MaterialTheme.colorScheme.primary,
                     navigationIconContentColor = Color.White,
                     titleContentColor = Color.White,
                     actionIconContentColor = Color.White,
@@ -107,7 +107,7 @@ fun ShipmentScreen(shipmentHistory: List<ShipmentItems>, loading: Boolean, navig
         },
         content = {
             ShipmentHistoryScreen(
-                modifier = Modifier.padding(it),
+                modifier = Modifier.padding(it).background(Color.White),
                 historyItems = shipmentHistory,
                 loading = loading,
                 shouldAnimateUpOnFirstLaunch = shouldAnimateOnFirstLaunch,

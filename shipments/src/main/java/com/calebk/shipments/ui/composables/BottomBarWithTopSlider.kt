@@ -35,6 +35,7 @@ import androidx.compose.material.icons.outlined.History
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -74,7 +75,7 @@ fun BottomBarWithTopSlider(navigateToCalculateScreen: () -> Unit, navigateToShip
                 .offset(x = sliderOffset)
                 .width(itemWidth)
                 .height(4.dp)
-                .background(Color(0xFF5f57bc))
+                .background(MaterialTheme.colorScheme.primary)
                 .padding(bottom = 8.dp),
         )
         Spacer(modifier = Modifier.height(12.dp))
@@ -97,7 +98,7 @@ fun BottomBarWithTopSlider(navigateToCalculateScreen: () -> Unit, navigateToShip
                         contentDescription = item.title,
                         modifier = Modifier.size(24.dp),
                         tint = if (selectedIndex == index) {
-                            Color(0xFF5f57bc)
+                            MaterialTheme.colorScheme.primary
                         } else {
                             Color.Gray
                         },

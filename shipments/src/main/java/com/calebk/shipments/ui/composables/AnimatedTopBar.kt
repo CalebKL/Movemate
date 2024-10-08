@@ -24,6 +24,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -56,7 +57,7 @@ fun AnimatedTopBar(
                 SearchingReceipt(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(Color(0xFF5f57bc))
+                        .background(MaterialTheme.colorScheme.primary)
                         .padding(top = 40.dp, bottom = 20.dp)
                         .padding(horizontal = 16.dp),
                     searchQuery = searchQuery,
@@ -68,7 +69,7 @@ fun AnimatedTopBar(
             } else {
                 HeaderSection(
                     modifier = Modifier.fillMaxWidth()
-                        .background(Color(0xFF5f57bc))
+                        .background(MaterialTheme.colorScheme.primary)
                         .padding(top = 40.dp)
                         .padding(horizontal = 16.dp),
                     searchQuery = searchQuery,

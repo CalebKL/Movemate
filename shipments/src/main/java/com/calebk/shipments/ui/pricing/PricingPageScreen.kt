@@ -23,6 +23,7 @@ import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.rememberTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -106,7 +107,7 @@ fun PricingPageScreen(navigateBackHome: () -> Unit) {
         }
     }
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().background(Color.White),
     ) {
         Column(
             modifier = Modifier.align(Alignment.Center),
@@ -154,7 +155,7 @@ fun PricingPageScreen(navigateBackHome: () -> Unit) {
                     .offset(y = boxSlideOffset.dp),
                 text = stringResource(R.string.amount_may_vary_description),
                 style = MaterialTheme.typography.bodyMedium,
-                color = Color(0xFF858585),
+                color = MaterialTheme.colorScheme.secondary,
                 textAlign = TextAlign.Center,
             )
             Spacer(modifier = Modifier.height(24.dp))

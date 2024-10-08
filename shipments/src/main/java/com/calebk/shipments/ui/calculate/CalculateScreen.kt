@@ -67,11 +67,11 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
     }
 
     Scaffold(
-        containerColor = Color(0xFF858585).copy(alpha = 0.1f),
+        containerColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f),
         topBar = {
             CalculateTopAppBar(
                 modifier = Modifier
-                    .background(Color(0xFF5f57bc)),
+                    .background(MaterialTheme.colorScheme.primary),
                 shouldAnimate = shouldAnimate,
                 navigateBackHome = navigateBackHome,
             )
@@ -80,8 +80,9 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
             Column(
                 modifier = Modifier
                     .padding(it)
+                    .background(Color.White)
                     .fillMaxHeight()
-                    .verticalScroll(rememberScrollState())
+                    .verticalScroll(rememberScrollState()),
             ) {
                 AnimatedVisibility(
                     visible = shouldAnimate,
@@ -95,6 +96,7 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
                         text = stringResource(R.string.destination),
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
+                        color = Color.Black,
                     )
                 }
                 AnimatedVisibility(
@@ -109,7 +111,7 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
                             .fillMaxWidth()
                             .padding(16.dp),
                         colors = CardColors(
-                            contentColor = Color(0xFF858585),
+                            contentColor = MaterialTheme.colorScheme.secondary,
                             containerColor = Color.White,
                             disabledContentColor = Color.Black,
                             disabledContainerColor = Color.Black,
@@ -120,7 +122,7 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
                         ) {
                             UserInputFields(
                                 modifier = Modifier
-                                    .background(color = Color(0xFF858585).copy(alpha = 0.1f))
+                                    .background(color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f))
                                     .padding(18.dp),
                                 icon = Icons.Default.UploadFile,
                                 placeHolder = stringResource(R.string.sender_location),
@@ -128,7 +130,7 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
                             Spacer(modifier = Modifier.height(8.dp))
                             UserInputFields(
                                 modifier = Modifier
-                                    .background(color = Color(0xFF858585).copy(alpha = 0.1f))
+                                    .background(color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f))
                                     .padding(18.dp),
                                 icon = Icons.Default.FilePresent,
                                 placeHolder = stringResource(R.string.receiver_location),
@@ -136,7 +138,7 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
                             Spacer(modifier = Modifier.height(8.dp))
                             UserInputFields(
                                 modifier = Modifier
-                                    .background(color = Color(0xFF858585).copy(alpha = 0.1f))
+                                    .background(color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.1f))
                                     .padding(18.dp),
                                 icon = Icons.Default.HourglassTop,
                                 placeHolder = stringResource(R.string.approx_weight),
@@ -149,12 +151,13 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
                     text = stringResource(R.string.packaging),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
+                    color = Color.Black,
                 )
                 Text(
                     modifier = Modifier.padding(start = 18.dp),
                     text = stringResource(R.string.what_are_you_sending),
                     style = MaterialTheme.typography.bodyLarge,
-                    color = Color(0xFF858585),
+                    color = MaterialTheme.colorScheme.secondary,
                 )
                 SendingItemCard(
                     modifier = Modifier
@@ -166,12 +169,13 @@ fun CalculateScreen(navigateToPricingPage: () -> Unit, navigateBackHome: () -> U
                     text = stringResource(R.string.categories),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
+                    color = Color.Black,
                 )
                 Text(
                     modifier = Modifier.padding(start = 18.dp),
                     text = stringResource(R.string.what_are_you_sending),
                     style = MaterialTheme.typography.bodyLarge,
-                    color = Color(0xFF858585),
+                    color = MaterialTheme.colorScheme.secondary,
                 )
                 Spacer(modifier = Modifier.height(12.dp))
                 Column(

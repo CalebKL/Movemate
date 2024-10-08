@@ -54,7 +54,7 @@ fun ShipmentHistoryCard(modifier: Modifier = Modifier, progress: Category, track
     OutlinedCard(
         modifier = modifier,
         colors = CardColors(
-            contentColor = Color(0xFF858585),
+            contentColor = MaterialTheme.colorScheme.secondary,
             containerColor = Color.White,
             disabledContentColor = Color.Black,
             disabledContainerColor = Color.Black,
@@ -82,13 +82,13 @@ fun ShipmentHistoryCard(modifier: Modifier = Modifier, progress: Category, track
                                     modifier = Modifier.size(18.dp),
                                     imageVector = Icons.Rounded.History,
                                     contentDescription = null,
-                                    tint = Color(0xFFCA7800),
+                                    tint = MaterialTheme.colorScheme.tertiary,
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
                                     progress.categoryName,
                                     fontSize = 14.sp,
-                                    color = Color(0xFFCA7800),
+                                    color = MaterialTheme.colorScheme.tertiary,
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
                             }
@@ -151,7 +151,7 @@ fun ShipmentHistoryCard(modifier: Modifier = Modifier, progress: Category, track
                 Row {
                     Text(
                         text = amount,
-                        color = Color(0xFF5f57bc),
+                        color = MaterialTheme.colorScheme.primary,
                         fontWeight = FontWeight.Bold,
                     )
                     Spacer(modifier = Modifier.width(6.dp))
@@ -160,7 +160,7 @@ fun ShipmentHistoryCard(modifier: Modifier = Modifier, progress: Category, track
                             .size(6.dp)
                             .align(Alignment.CenterVertically)
                             .clip(CircleShape)
-                            .background(Color(0xFF858585)),
+                            .background(MaterialTheme.colorScheme.secondary),
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(text = stringResource(R.string.sep_20_2023), style = MaterialTheme.typography.bodyMedium)

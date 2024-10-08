@@ -92,7 +92,7 @@ fun ShipmentHistoryScreen(historyItems: List<ShipmentItems>, loading: Boolean, m
             modifier = Modifier
                 .fillMaxWidth()
                 .horizontalScroll(rememberScrollState())
-                .background(Color(0xFF5f57bc))
+                .background(MaterialTheme.colorScheme.primary)
                 .padding(horizontal = 8.dp)
                 .offset(x = rowOffset.value.dp)
                 .testTag("Navigation bar Items"),
@@ -158,6 +158,7 @@ fun ShipmentHistoryScreen(historyItems: List<ShipmentItems>, loading: Boolean, m
                             text = stringResource(R.string.shipments),
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
+                            color = Color.Black,
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                     }
@@ -272,7 +273,7 @@ private fun CategoryLabel(name: String, count: Int, isSelected: Boolean) {
 private fun CountBadge(count: Int, isSelected: Boolean) {
     Surface(
         shape = RoundedCornerShape(16.dp),
-        color = if (isSelected) Color(0xFFCA7800) else Color(0xFF6570AE),
+        color = if (isSelected) MaterialTheme.colorScheme.tertiary else MaterialTheme.colorScheme.surfaceTint,
         modifier = Modifier.padding(horizontal = 12.dp),
     ) {
         Text(
@@ -288,7 +289,7 @@ private fun SelectionIndicator() {
     Spacer(modifier = Modifier.height(8.dp))
     Box(
         modifier = Modifier
-            .background(Color(0xFFFF9800))
+            .background(MaterialTheme.colorScheme.tertiary)
             .size(width = 100.dp, height = 4.dp),
     )
 }

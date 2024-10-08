@@ -42,7 +42,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.calebk.shipments.ui.composables.Dimensions.CHIP_BORDER_WIDTH
 import com.calebk.shipments.ui.composables.Dimensions.CHIP_CORNER_RADIUS
@@ -50,7 +49,6 @@ import com.calebk.shipments.ui.composables.Dimensions.CHIP_SPACING
 import com.calebk.shipments.ui.composables.Dimensions.CHIP_VERTICAL_SPACING
 import com.calebk.shipments.ui.composables.Dimensions.ICON_TEXT_SPACING
 
-@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun FilterChipsSection(modifier: Modifier = Modifier) {
     var shouldAnimateIn by remember { mutableStateOf(false) }
@@ -118,7 +116,7 @@ private fun SelectableChip(isSelected: Boolean, onSelectionChanged: (Boolean) ->
         onClick = { onSelectionChanged(!isSelected) },
         border = BorderStroke(
             width = CHIP_BORDER_WIDTH,
-            color = Color(0xFF858585),
+            color = MaterialTheme.colorScheme.secondary,
         ),
         shape = RoundedCornerShape(CHIP_CORNER_RADIUS),
         colors = ButtonDefaults.outlinedButtonColors(

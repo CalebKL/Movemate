@@ -120,6 +120,7 @@ fun HeaderSection(
             }
             Surface(
                 modifier = Modifier.clip(CircleShape),
+                color = Color.White,
             ) {
                 IconButton(
                     modifier = Modifier.size(32.dp),

@@ -40,8 +40,8 @@ fun CalculateTopAppBar(shouldAnimate: Boolean, modifier: Modifier = Modifier, na
     CenterAlignedTopAppBar(
         modifier = modifier,
         colors = TopAppBarColors(
-            containerColor = Color(0xFF5f57bc),
-            scrolledContainerColor = Color(0xFF5f57bc),
+            containerColor = MaterialTheme.colorScheme.primary,
+            scrolledContainerColor = MaterialTheme.colorScheme.primary,
             navigationIconContentColor = Color.White,
             titleContentColor = Color.White,
             actionIconContentColor = Color.White,

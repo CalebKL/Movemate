@@ -112,7 +112,7 @@ fun HomeScreen(
                     showSearchContent = false
                     navigateBackHome()
                 },
-                backgroundColor = Color(0xFF5f57bc),
+                backgroundColor = MaterialTheme.colorScheme.primary,
                 onReadyToSearch = { focused ->
                     if (focused) {
                         showSearchContent = true
@@ -162,7 +162,7 @@ fun HomeScreen(
                                 .padding(start = 12.dp, end = 12.dp, bottom = 12.dp)
                                 .testTag("Searchable Items"),
                             colors = CardColors(
-                                contentColor = Color(0xFF858585),
+                                contentColor = MaterialTheme.colorScheme.secondary,
                                 containerColor = Color.White,
                                 disabledContentColor = Color.Black,
                                 disabledContainerColor = Color.Black,
@@ -199,6 +199,7 @@ fun HomeScreen(
                                 modifier = Modifier.padding(start = 12.dp, bottom = 12.dp),
                                 text = stringResource(R.string.tracking),
                                 style = MaterialTheme.typography.titleMedium,
+                                color = Color.Black,
                             )
                         }
                     }
@@ -226,6 +227,7 @@ fun HomeScreen(
                                 modifier = Modifier.padding(start = 12.dp),
                                 text = stringResource(R.string.available_vehicles),
                                 style = MaterialTheme.typography.titleMedium,
+                                color = Color.Black,
                             )
                         }
                     }

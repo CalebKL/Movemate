@@ -52,7 +52,7 @@ fun ShipmentContent(modifier: Modifier = Modifier) {
         modifier = modifier
             .testTag("Shipment Content"),
         colors = CardColors(
-            contentColor = Color(0xFF858585),
+            contentColor = MaterialTheme.colorScheme.secondary,
             containerColor = Color.White,
             disabledContentColor = Color.Black,
             disabledContainerColor = Color.Black,
@@ -110,7 +110,7 @@ fun ShipmentContent(modifier: Modifier = Modifier) {
                         modifier = Modifier.weight(1f),
                     ) {
                         Text(
-                            color = Color(0xFF858585),
+                            color = MaterialTheme.colorScheme.secondary,
                             style = MaterialTheme.typography.bodyMedium,
                             text = stringResource(R.string.sender),
                         )
@@ -125,7 +125,7 @@ fun ShipmentContent(modifier: Modifier = Modifier) {
                     horizontalAlignment = Alignment.Start,
                 ) {
                     Text(
-                        color = Color(0xFF858585),
+                        color = MaterialTheme.colorScheme.secondary,
                         style = MaterialTheme.typography.bodyMedium,
                         text = stringResource(R.string.time),
                     )
@@ -170,7 +170,7 @@ fun ShipmentContent(modifier: Modifier = Modifier) {
                         modifier = Modifier.weight(1f),
                     ) {
                         Text(
-                            color = Color(0xFF858585),
+                            color = MaterialTheme.colorScheme.secondary,
                             style = MaterialTheme.typography.bodyMedium,
                             text = stringResource(R.string.receiver),
                         )
@@ -186,7 +186,7 @@ fun ShipmentContent(modifier: Modifier = Modifier) {
                     horizontalAlignment = Alignment.Start,
                 ) {
                     Text(
-                        color = Color(0xFF858585),
+                        color = MaterialTheme.colorScheme.secondary,
                         style = MaterialTheme.typography.bodyMedium,
                         text = stringResource(R.string.status),
                     )

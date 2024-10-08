@@ -24,6 +24,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
@@ -42,13 +43,15 @@ fun NothingHere() {
                     .align(Alignment.CenterHorizontally),
                 text = stringResource(R.string.nothing_illustration),
                 style = TextStyle(fontSize = 55.sp),
+                color = Color.Black,
             )
             Text(
                 modifier = Modifier
                     .padding(8.dp)
                     .align(Alignment.CenterHorizontally),
                 text = stringResource(R.string.there_is_no_data_to_display_at_the_moment),
-                style = MaterialTheme.typography.headlineMedium,
+                style = MaterialTheme.typography.bodyLarge,
+                color = Color.Black,
             )
         }
     }
